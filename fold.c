@@ -9,7 +9,7 @@ int main(void)
 	int massive[] = { 1, 2, 3, 4, 5 };
 	int N = sizeof(massive) / sizeof(int);
 
-	printf("%i\n", fold(massive, N, '*'));   //ббнярх фекюелне деиярбхе 
+	printf("%i\n", fold(massive, N, '*'));   //VVESTI JELAEMOE DEISTVIE 
 	system("pause");
 }
 
@@ -22,7 +22,7 @@ int fold( int* mass, int M, char K)
 
 	for (int i = 0; i < M; i++)
 	{
-		x = f(&x, (mass + i), '*');     //ббнярх рн фе фекюелне деиярбхе
+		x = f(&x, (mass + i), '*');     //VVESTI TO JE JELAEMOE DEISTVIE
 	}
 	
 	return x;
