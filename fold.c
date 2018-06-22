@@ -1,36 +1,34 @@
 #include <stdio.h>
 
-int f(int *cell_1, int *cell_2, char K);
+int f(int *cell_1, char K, int M);
+int fold(int mass, int M, char S);
 
-int fold(int mass, int M, char K);
-
-int main(void)
+void main(void)
 {
-	int massive[] = { 1, 2, 3, 4, 5 };
-	int N = sizeof(massive) / sizeof(int);
+	int massive[] = { 1, 2, 3, 4, 5, 10, 10 };
+	int M = sizeof(massive) / sizeof(float);
+	char S = '+';  //Plus or multiply
 
-	printf("%i\n", fold(massive, N, '*'));   //VVESTI JELAEMOE DEISTVIE 
+	printf("%i\n", fold(massive, M, S));
 	system("pause");
 }
 
-int fold( int* mass, int M, char K)
-{	
-	int x;
-	if (K == '+') x = 0;
-	if (K == '-') x = *mass;
-	if (K == '*') x = 1;
-
-	for (int i = 0; i < M; i++)
-	{
-		x = f(&x, (mass + i), '*');     //VVESTI TO JE JELAEMOE DEISTVIE
-	}
-	
-	return x;
+int fold(int mass, int M, char S)
+{
+	return f(mass, S, mass + M * sizeof(mass));
 }
 
-int f(int *cell_1, int *cell_2, char K)
+int f(int *cell, char K, int M)
 {
-	if (K == '+') return *cell_1 + *cell_2;
-	if (K == '-') return (*cell_1) - *cell_2;
-	if (K == '*') return (*cell_1) * (*cell_2);	
+	if (K == '+')
+	{
+		if (cell != M) return *cell + f((cell + 1), '+', M);
+		else return 0;
+	}
+
+	if (K == '*')
+	{
+		if (cell != M) return *cell * f((cell + 1), '*', M);
+		else return 1;
+	}
 }
